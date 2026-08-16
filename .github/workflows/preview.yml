@@ -1,4 +1,4 @@
-name: Preview Build
+Name: Preview Build
 on:
   workflow_dispatch:
     inputs:
@@ -28,6 +28,11 @@ jobs:
       - name: Native Build
         if: steps.cache.outputs.cache-hit != 'true'
         run: ./run lib core
+      - name: Upload Libcore AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: libcore-aar
+          path: app/libs/libcore.aar
   build:
     name: Build OSS APK
     runs-on: ubuntu-latest
